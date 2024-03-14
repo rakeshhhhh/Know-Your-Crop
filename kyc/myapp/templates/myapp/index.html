@@ -51,6 +51,19 @@
 
         <link href="{% static 'myapp/assets/css/templatemo-tiya-golf-club.css' %}" rel="stylesheet">
 
+        <style>
+          .prediction-box {
+
+             background-color: rgb(61 64 91);
+             color: white;
+             font-size: 150%;
+             border-radius: 15px;
+             padding: 20px;
+             margin-top: 20px;
+
+          }
+       </style>
+
 
     </head>
 
@@ -178,7 +191,7 @@
 
                         <div class="col-lg-5 col-12 mx-auto">
                         <h4 class="mb-4 pb-lg-2">Please Fill the Details!!!</h4>
-                            <form method="post" action="{% url 'predict' %}" class="custom-form membership-form shadow-lg" role="form">
+                            <form method="post" action="{% url 'predict' %}" id="predict-form" class="custom-form membership-form shadow-lg" role="form">
                                {% csrf_token %}
                                 <h4 class="text-white mb-4">Soil Factors</h4>
 
@@ -209,6 +222,11 @@
                                     <button type="submit" value="Predict" class="form-control">Submit</button>
                                 </div>
                             </form>
+
+                         <div id="prediction-output">
+
+                         </div>
+
                         </div>
 
                     </div>
@@ -239,6 +257,40 @@
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#81B29A" fill-opacity="1" d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
         </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('predict-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the HTML content with the predicted crop
+                const predictionOutput = document.getElementById('prediction-output');
+                predictionOutput.innerHTML = `
+                    <div class="prediction-box pd-5 text-center">
+                        <p>PREDICTED CROP</p>
+                        <p>${data.predicted_crop}</p>
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+</script>
+
 
 
         <!-- JAVASCRIPT FILES -->

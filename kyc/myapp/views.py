@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
+from django.http import JsonResponse
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 import joblib
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
+
 
 def index(request):
     return render(request, 'myapp/index.html')
@@ -18,7 +20,7 @@ def predict(request):
         ph_value = float(request.POST['ph_value'])
 
         # Example decision tree model
-        #X = np.array([[temperature, humidity, soil_moisture, ph_value]])
+        # X = np.array([[temperature, humidity, soil_moisture, ph_value]])
         # Load your trained model here
         model = joblib.load('kyc/trained_decision_tree_model.joblib')
         label_encoder = joblib.load('kyc/decisiontree_encoder.pkl')
@@ -28,7 +30,7 @@ def predict(request):
                                   columns=['temperature', 'humidity', 'ph', 'water availability'])
         predicted_crop = model.predict(user_input)
 
-        #predicted_crop = "Wheat"  # Placeholder
+        # predicted_crop = "Wheat"  # Placeholder
         user_input_encoded = user_input.copy()
         user_input_encoded['label'] = 0
         user_input_encoded['label'] = label_encoder.transform(['rice'])[0]
@@ -38,8 +40,12 @@ def predict(request):
         # Convert the predicted label back to the original class
         predicted_crop = label_encoder.inverse_transform(predicted_crop_encoded)
 
-        #print(f'\nThe predicted crop for the given soil factors is: {predicted_crop[0]}')
+        # print(f'\nThe predicted crop for the given soil factors is: {predicted_crop[0]}')
 
-        return HttpResponse(f"Predicted crop: {predicted_crop[0]}")
+    #     return HttpResponse(f"Predicted crop: {predicted_crop[0]}")
+    # else:
+    #     return HttpResponse("Invalid request")
+
+        return JsonResponse({'predicted_crop': predicted_crop[0]})
     else:
-        return HttpResponse("Invalid request")
+        return JsonResponse({'error': 'Invalid request'})
