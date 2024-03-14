@@ -6,7 +6,6 @@ import joblib
 import pandas as pd
 
 
-
 def index(request):
     return render(request, 'myapp/index.html')
 

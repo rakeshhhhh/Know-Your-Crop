@@ -53,14 +53,11 @@
 
         <style>
           .prediction-box {
-
-             background-color: rgb(61 64 91);
-             color: white;
+             background-color: #7d95e3;
              font-size: 150%;
              border-radius: 15px;
              padding: 20px;
              margin-top: 20px;
-
           }
        </style>
 
@@ -110,15 +107,13 @@
                     <div class="row">
 
                         <div class="col-lg-6 col-12 mb-5 mb-lg-0">
-                            <h2 class="text-white">Welcome to KYC</h2>
-
-                            <h1 class="cd-headline rotate-1 text-white mb-4 pb-2">
-                                <span>An </span>
-                                <span class="cd-words-wrapper">
-                                    <b class="is-visible">IOT</b>
-                                </span>
-                                <span>Based Crop Prediction System </span>
-                            </h1>
+                            <h1 class="text-white">Welcome to <span class="cd-words-wrapper">
+                                    <b class="is-visible">KYC </b>
+                                </span></h1>
+                            <br>
+                            <h2 class="cd-headline rotate-1 text-white mb-4 pb-2">
+                                <span>An IOT Based Crop Prediction System </span>
+                            </h2>
 
                             <div class="custom-btn-group">
                                 <a href="#section_3" class="btn custom-btn smoothscroll me-3">Proceed</a>
@@ -279,8 +274,8 @@
                 const predictionOutput = document.getElementById('prediction-output');
                 predictionOutput.innerHTML = `
                     <div class="prediction-box pd-5 text-center">
-                        <p>PREDICTED CROP</p>
-                        <p>${data.predicted_crop}</p>
+                        <p class="text-white">PREDICTED CROP</p>
+                        <p class="text-white">${data.predicted_crop}</p>
                     </div>
                 `;
             })
