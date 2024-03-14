@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Prediction System</title>
+</head>
+<body>
+    <h1>Crop Prediction</h1>
+    <form method="post" action="{% url 'predict' %}">
+        {% csrf_token %}
+        <label for="temperature">Temperature:</label>
+        <input type="text" id="temperature" name="temperature"><br><br>
+
+        <label for="humidity">Humidity:</label>
+        <input type="text" id="humidity" name="humidity"><br><br>
+
+        <label for="soil_moisture">Soil Moisture:</label>
+        <input type="text" id="soil_moisture" name="soil_moisture"><br><br>
+
+        <label for="ph_value">Soil pH Value:</label>
+        <input type="text" id="ph_value" name="ph_value"><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+</body>
+</html>
