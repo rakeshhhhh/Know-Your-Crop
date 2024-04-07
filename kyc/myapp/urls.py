@@ -21,5 +21,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('predict/', views.predict, name='predict'),
+    path('fetch-sensor-data/', views.fetch_sensor_data, name='fetch_sensor_data'),
 ]
 

@@ -213,8 +213,9 @@
 
                                         <label for="ph_value">Soil pH Value </label>
                                     </div>
-
-                                    <button type="submit" value="Predict" class="form-control">Submit</button>
+                                    <button type="button" class="form-control" onclick="fetchSensorData()">Fetch Sensor Data</button>
+                                    <button type="reset" value="Reset" class="form-control">Reset</button>
+                                    <button type="submit" value="Predict" class="form-control">Predict</button>
                                 </div>
                             </form>
 
@@ -284,6 +285,20 @@
             });
         });
     });
+
+    function fetchSensorData() {
+    fetch('/fetch-sensor-data/')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("temperature").value = data.temperature || '';
+            document.getElementById("humidity").value = data.humidity || '';
+            document.getElementById("soil_moisture").value = data.soil_moisture || '';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
 </script>
 
 
