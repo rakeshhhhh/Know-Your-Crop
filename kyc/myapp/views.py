@@ -62,8 +62,9 @@ def fetch_sensor_data(request):
                 temperature = latest_entry.get('field1')
                 humidity = latest_entry.get('field2')
                 soil_moisture = latest_entry.get('field3')
+                ph_value = latest_entry.get('field4')
 
-                return JsonResponse({'temperature': temperature, 'humidity': humidity, 'soil_moisture': soil_moisture})
+                return JsonResponse({'temperature': temperature, 'humidity': humidity, 'soil_moisture': soil_moisture, 'ph_value': ph_value})
             else:
                 return JsonResponse({'error': 'No data available'}, status=404)
         else:

@@ -37,6 +37,7 @@
         <meta name="author" content="">
 
         <title>KYC-Know Your Crop</title>
+        <link rel="icon" type="image/png" href="{% static 'myapp/assets/images/plant.png' %}">
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -144,7 +145,7 @@
                         <div class="col-lg-6 col-md-6 col-12 mb-6 mb-lg-0 mb-md-0">
 
                         <ul>
-                            <li> Our goal is to create a crop predicting tool for temperature, moisture, humidity, and pH-value  are monitored using IOT sensors</li>
+                            <li> Our goal is to create a crop predicting tool by temperature, moisture, humidity, and pH-value  monitored using IOT sensors</li>
                             <br>
                             <li> Data from IoT sensors can then  particular soil type. be transferred to a central location for pattern detection, processing and visualization</li>
                             <br>
@@ -293,6 +294,7 @@
             document.getElementById("temperature").value = data.temperature || '';
             document.getElementById("humidity").value = data.humidity || '';
             document.getElementById("soil_moisture").value = data.soil_moisture || '';
+            document.getElementById("ph_value").value = data.ph_value || '';
         })
         .catch(error => {
             console.error('Error:', error);
@@ -314,3 +316,4 @@
 
     </body>
 </html>
+
